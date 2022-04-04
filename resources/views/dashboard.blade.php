@@ -19,9 +19,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php($i = 1)
                         @foreach($users as $key => $value)
                         <tr>
-                          <td>{{$value->id}}</td>
+                          <td>{{ $i++}}</td>
                           <td>{{$value->name}}</td>
                           <td>{{$value->email}}</td>
                           <td>{{$value->created_at->diffForHumans()}}</td>
