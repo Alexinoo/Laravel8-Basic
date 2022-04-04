@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,10 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
     Route::get('/dashboard', function () {
 
         // ELOQUENT ORM
-        $users = User::all();
+        // $users = User::all();
+
+        // QUERY BUILDER
+        $users = DB::table('users')->get();
 
         return view('dashboard', compact('users'));
     })->name('dashboard');
