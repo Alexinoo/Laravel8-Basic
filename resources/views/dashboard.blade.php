@@ -1,7 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Hi..{{Auth::user()->name }}
+        Hi.. <b>{{Auth::user()->name }}</b>
+        <b style="float: right;">Total Users
+        <span class="badge rounded-pill bg-primary">{{ count($users)}}</span>
+        </b>
         </h2>
     </x-slot>
 
