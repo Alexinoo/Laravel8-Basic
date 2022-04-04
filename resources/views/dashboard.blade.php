@@ -9,6 +9,26 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- <x-jet-welcome /> --}}
+               <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $key => $value)
+                        <tr>
+                          <td>{{$value->id}}</td>
+                          <td>{{$value->name}}</td>
+                          <td>{{$value->email}}</td>
+                          <td>{{$value->created_at->diffForHumans()}}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
             </div>
         </div>
 
