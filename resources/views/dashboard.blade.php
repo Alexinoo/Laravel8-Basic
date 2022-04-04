@@ -28,7 +28,8 @@
                           <td>{{ $i++}}</td>
                           <td>{{$value->name}}</td>
                           <td>{{$value->email}}</td>
-                          <td>{{$value->created_at->diffForHumans()}}</td>
+                          {{-- <td>{{$value->created_at->diffForHumans()}}</td> --}}
+                          <td>{{ Carbon\Carbon::parse($value->created_at)->diffForHumans() }}</td>
                         </tr>
                         @endforeach
                         </tbody>
