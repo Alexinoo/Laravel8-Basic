@@ -13,6 +13,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        {{-- BootStrap.min .css --}}
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -42,5 +45,6 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     </body>
 </html>
