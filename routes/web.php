@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Category
+Route::get('category', [CategoryController::class, 'index'])->name('all.category');
 
 Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
