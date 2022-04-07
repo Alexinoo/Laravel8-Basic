@@ -112,7 +112,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        // ELOQUENT ORM - FIND
+        // $category = Category::find($id);
+
+        // QUERY BUILDER  EDIT - EDIT RECORD  - METHOD -1
+        $category  = DB::table('categories')->where('id', $id)->first();
 
         return view('Admin.Category.edit', compact('category'));
     }
@@ -139,17 +143,26 @@ class CategoryController extends Controller
         );
 
         // ELOQUENT ORM EDIT - UPDATE - METHOD -1
-        $category = Category::find($id)->update([
-            'category_name' => $request->category_name,
-            'user_id' => Auth::user()->id,
-            'updated_at' =>   Carbon::now()
-        ]);
+        // $category = Category::find($id)->update([
+        //     'category_name' => $request->category_name,
+        //     'user_id' => Auth::user()->id,
+        //     'updated_at' =>   Carbon::now()
+        // ]);
+
         // ELOQUENT ORM EDIT - UPDATE  - METHOD -2
         // $category = Category::find($id);
         // $category->category_name = $request->category_name;
         // $category->user_id =  Auth::user()->id;
         // $category->updated_at =   Carbon::now();
         // $category->update();
+
+        // QUERY BUILDER  - UPDATE RECORD  - METHOD -1
+        $data = array();
+        $data['category_name'] = $request->category_name;
+        $data['user_id']  = Auth::user()->id;
+        $data['updated_at']  = Carbon::now();
+
+        DB::table('categories')->where('id', $id)->update($data);
 
         return redirect()->route('all.category')->with('success', 'Category Updated successfully');
     }
