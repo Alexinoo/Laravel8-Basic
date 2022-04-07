@@ -35,7 +35,13 @@ class CategoryController extends Controller
         //     ->select('categories.*', 'users.name')
         //     ->latest()->paginate(5);
 
-        return view('Admin.Category.index', compact('categories'));
+
+        // SOFT DELETE - DELETE - PUT ITEMS IN A TRASH
+        $trashCategory = Category::onlyTrashed()
+            ->latest()->paginate(3);
+
+
+        return view('Admin.Category.index', compact('categories', 'trashCategory'));
     }
 
     /**
