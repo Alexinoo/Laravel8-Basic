@@ -6,8 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-
-
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -120,9 +118,9 @@
                                             @endif                                           
                                             </td>
                                             <td>
-                                                <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info btn-sm">Edit</a>
+                                                <a href="{{url('category/restore/'.$category->id)}}" class="btn btn-info btn-sm">Restore</a>
 
-                                                <a href="{{url('category/delete/'.$category->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                                                <a href="{{url('category/delete_permanently/'.$category->id)}}" class="btn btn-danger btn-sm">Delete permanent</a>
                                             </td>
                                     </tr>
                                 @endforeach
