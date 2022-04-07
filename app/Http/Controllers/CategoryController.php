@@ -23,7 +23,10 @@ class CategoryController extends Controller
 
 
         // QUERY BUILDER - Read Data
-        $categories = DB::table('categories')->latest()->get();
+        // $categories = DB::table('categories')->latest()->get();
+
+         // QUERY BUILDER - Read Data - Pagination
+        $categories = DB::table('categories')->latest()->paginate(5);
 
 
         return view('Admin.Category.index', compact('categories'));
