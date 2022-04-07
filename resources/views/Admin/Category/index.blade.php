@@ -6,6 +6,8 @@
     </x-slot>
 
     <div class="py-12">
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -82,6 +84,64 @@
                 </div>
 
             </div>
-        </div>        
+        </div>    
+        
+        {{-- TRASH PART --}}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="card">
+                        <div class="card-header">
+                               Trash List
+                                </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Category name</th>
+                                        <th scope="col">Created By</th>
+                                        <th scope="col">Created At</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {{-- @php($i=1) --}}
+                                @foreach($trashCategory as $key => $category)
+                                      <tr>
+                                         <td>{{ $categories->firstItem() + $loop->index }}</td>
+                                         <td>{{ $category->category_name}}</td>
+                                         <td>{{ $category->user->name}}</td>
+                                         <td>
+                                            @if($category->created_at)
+                                                {{Carbon\Carbon::parse( $category->created_at)->diffForHumans() }}
+                                            @else
+                                                <span class="text-danger">No Date Set</span>
+                                            @endif                                           
+                                            </td>
+                                            <td>
+                                                <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info btn-sm">Edit</a>
+
+                                                <a href="{{url('category/delete/'.$category->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                                            </td>
+                                    </tr>
+                                @endforeach
+                                  
+                                    </tbody>
+                                </table>
+                            {{$trashCategory->links()}}
+                       </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+               
+                </div>
+
+            </div>
+        </div>  
+
+        {{-- END TRASH --}}
+
     </div>
 </x-app-layout>
