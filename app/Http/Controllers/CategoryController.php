@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         // ELOQUENT ORM - Read Data
-        $categories = Category::all();
+        $categories = Category::latest()->get();
 
         return view('Admin.Category.index', compact('categories'));
     }
