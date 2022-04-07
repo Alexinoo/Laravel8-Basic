@@ -24,17 +24,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">User ID</th>
                                         <th scope="col">Category name</th>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
-                                    <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                @php($i=1)
+                                @foreach($categories as $key => $category)
+                                      <tr>
+                                         <td>{{ $i++}}</td>
+                                         <td>{{ $category->category_name}}</td>
+                                         <td>{{ $category->user_id}}</td>
+                                         <td>{{ $category->created_at->format('d-m-Y')}}</td>
                                     </tr>
+                                @endforeach
+                                  
                                     </tbody>
                                 </table>
                        </div>
