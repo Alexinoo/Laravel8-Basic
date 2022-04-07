@@ -20,7 +20,7 @@ class CategoryController extends Controller
         // ELOQUENT ORM - Read Data
         // $categories = Category::all(); --BASIC
         // $categories = Category::latest()->get(); //ORDER BY CREATED_AT
-        $categories = Category::latest()->paginate(5); //PAGINATION 5 PER PAGE
+        // $categories = Category::latest()->paginate(5); //PAGINATION 5 PER PAGE
 
 
         // QUERY BUILDER - Read Data
@@ -29,6 +29,11 @@ class CategoryController extends Controller
         // QUERY BUILDER - Read Data - Pagination
         // $categories = DB::table('categories')->latest()->paginate(5);
 
+        // QUERY BUILDER - JOINS
+        $categories = DB::table('categories')
+            ->join('users', 'categories.user_id', 'users.id')
+            ->select('categories.*', 'users.name')
+            ->latest()->paginate(5);
 
         return view('Admin.Category.index', compact('categories'));
     }
