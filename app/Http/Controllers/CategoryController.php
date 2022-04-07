@@ -20,7 +20,7 @@ class CategoryController extends Controller
         // ELOQUENT ORM - Read Data
         // $categories = Category::all(); --BASIC
         // $categories = Category::latest()->get(); //ORDER BY CREATED_AT
-        // $categories = Category::latest()->paginate(5); //PAGINATION 5 PER PAGE
+        $categories = Category::latest()->paginate(5); //PAGINATION 5 PER PAGE
 
 
         // QUERY BUILDER - Read Data
@@ -30,10 +30,10 @@ class CategoryController extends Controller
         // $categories = DB::table('categories')->latest()->paginate(5);
 
         // QUERY BUILDER - JOINS
-        $categories = DB::table('categories')
-            ->join('users', 'categories.user_id', 'users.id')
-            ->select('categories.*', 'users.name')
-            ->latest()->paginate(5);
+        // $categories = DB::table('categories')
+        //     ->join('users', 'categories.user_id', 'users.id')
+        //     ->select('categories.*', 'users.name')
+        //     ->latest()->paginate(5);
 
         return view('Admin.Category.index', compact('categories'));
     }
@@ -112,7 +112,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return view('Admin.Category.edit', compact('category'));
     }
 
     /**
@@ -124,7 +126,32 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            [
+                'category_name' => 'required|unique:categories|max:255',
+            ],
+            // Custom message errors
+            [
+                'category_name.required' => 'Category name cannot be blank',
+                'category_name.unique' => 'Duplicate found',
+                'category_name.max' => 'Category should be less than 255 characters',
+            ]
+        );
+
+        // ELOQUENT ORM EDIT - UPDATE - METHOD -1
+        $category = Category::find($id)->update([
+            'category_name' => $request->category_name,
+            'user_id' => Auth::user()->id,
+            'updated_at' =>   Carbon::now()
+        ]);
+        // ELOQUENT ORM EDIT - UPDATE  - METHOD -2
+        // $category = Category::find($id);
+        // $category->category_name = $request->category_name;
+        // $category->user_id =  Auth::user()->id;
+        // $category->updated_at =   Carbon::now();
+        // $category->update();
+
+        return redirect()->route('all.category')->with('success', 'Category Updated successfully');
     }
 
     /**
