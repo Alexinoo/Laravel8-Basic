@@ -36,7 +36,13 @@
                                          <td>{{ $i++}}</td>
                                          <td>{{ $category->category_name}}</td>
                                          <td>{{ $category->user_id}}</td>
-                                         <td>{{ $category->created_at->format('d-m-Y')}}</td>
+                                         <td>
+                                            @if($category->created_at)
+                                                {{ $category->created_at->diffForHumans() }}
+                                            @else
+                                                <span class="text-danger">No Date Set</span>
+                                            @endif                                           
+                                            </td>
                                     </tr>
                                 @endforeach
                                   
