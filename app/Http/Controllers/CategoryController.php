@@ -44,16 +44,25 @@ class CategoryController extends Controller
             // Custom message errors
             [
                 'category_name.required' => 'Category name cannot be blank',
-                'category_name.unique' => 'Category name must be unique',
+                'category_name.unique' => 'Duplicate found',
                 'category_name.max' => 'Category should be less than 255 characters',
             ]
         );
 
-        Category::insert([
-            'category_name' => $request->category_name,
-            'user_id' => Auth::user()->id,
-            'created_at' => Carbon::now()
-        ]);
+        //ELOQUENT ORM - INSERT DATA
+        // Category::insert([
+        //     'category_name' => $request->category_name,
+        //     'user_id' => Auth::user()->id,
+        //     'created_at' => Carbon::now()
+        // ]);
+
+        $category = new Category;
+        $category->category_name = $request->category_name;
+        $category->user_id =  Auth::user()->id;
+        $category->created_at =   Carbon::now();
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category Added successfully');
     }
 
     /**
