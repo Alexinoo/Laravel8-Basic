@@ -34,9 +34,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'category_name' => 'required|unique:categories|max:255',
-        ]);
+        $validated = $request->validate(
+            [
+                'category_name' => 'required|unique:categories|max:255',
+            ],
+            // Custom message errors
+            [
+                'category_name.required' => 'Category name cannot be blank',
+                'category_name.unique' => 'Category name must be unique',
+                'category_name.max' => 'Category should be less than 255',
+            ]
+        );
     }
 
     /**
