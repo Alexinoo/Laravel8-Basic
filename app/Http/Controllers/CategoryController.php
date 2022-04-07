@@ -19,8 +19,12 @@ class CategoryController extends Controller
     {
         // ELOQUENT ORM - Read Data
         // $categories = Category::all(); --BASIC
+        // $categories = Category::latest()->get(); //ORDER BY CREATED_AT
 
-        $categories = Category::latest()->get(); //ORDER BY CREATED_AT
+
+        // QUERY BUILDER - Read Data
+        $categories = DB::table('categories')->latest()->get();
+
 
         return view('Admin.Category.index', compact('categories'));
     }
