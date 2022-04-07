@@ -42,7 +42,7 @@ class CategoryController extends Controller
             [
                 'category_name.required' => 'Category name cannot be blank',
                 'category_name.unique' => 'Category name must be unique',
-                'category_name.max' => 'Category should be less than 255',
+                'category_name.max' => 'Category should be less than 255 characters',
             ]
         );
     }
