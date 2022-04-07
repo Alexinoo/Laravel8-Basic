@@ -6,29 +6,58 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- <x-jet-welcome /> --}}
-               <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">User ID</th>
-                            <th scope="col">Category name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      
-                        <tr>
-                         <td>1</td>
-                         <td>User ID</td>
-                         <td>Category name</td>
-                        </tr>
-                        </tbody>
-                    </table>
-            </div>
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                               All categories
+                                </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User ID</th>
+                                        <th scope="col">Category name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                    <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                       </div>
+                    </div>
+                </div>
 
-        
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Add Category</div>
+                        <div class="card-body">
+                            <form action="{{ route('store.category')}}" method="POST">
+                                @csrf
+                                <div class="form-group mb-3">
+                                    <label for="category_name">Category Name</label>
+                                    <input type="text" name="category_name" id="category_name" class="form-control" />
+                                    @error('category_name')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                 <div class="form-group">
+                                    <input type="submit" value="Submit"
+                                     class="btn btn-primary w-100 " />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>        
     </div>
 </x-app-layout>
