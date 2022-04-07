@@ -17,7 +17,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Admin.Category.index');
+        // ELOQUENT ORM - Read Data
+        $categories = Category::all();
+
+        return view('Admin.Category.index', compact('categories'));
     }
 
     /**
