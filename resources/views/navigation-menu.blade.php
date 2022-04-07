@@ -20,6 +20,11 @@
                     <x-jet-nav-link href="{{ route('all.category')}}">
                        Category
                     </x-jet-nav-link>
+
+                    {{-- ADDED CATEGORIES --}}
+                    <x-jet-nav-link href="{{ route('all.brand')}}">
+                       Brand
+                    </x-jet-nav-link>
                 </div>
             </div>
 
