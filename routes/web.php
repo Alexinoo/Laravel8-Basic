@@ -21,7 +21,11 @@ Route::get('/', function () {
 });
 
 // Category
-Route::get('category', [CategoryController::class, 'index'])->name('all.category');
+Route::get('category/all', [CategoryController::class, 'index'])->name('all.category');
+
+Route::post('category/add', [CategoryController::class, 'store'])->name('store.category');
+
+
 
 Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
