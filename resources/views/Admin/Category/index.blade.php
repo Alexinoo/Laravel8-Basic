@@ -49,7 +49,7 @@
                                             <td>
                                                 <a href="{{url('category/edit/'.$category->id)}}" class="btn btn-info btn-sm">Edit</a>
 
-                                                <a href="{{url('category/delete/'.$category->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                                                <a href="{{url('category/softdelete/'.$category->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                     </tr>
                                 @endforeach
