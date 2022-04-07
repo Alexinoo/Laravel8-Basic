@@ -30,10 +30,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @php($i=1)
+                                {{-- @php($i=1) --}}
                                 @foreach($categories as $key => $category)
                                       <tr>
-                                         <td>{{ $i++}}</td>
+                                         <td>{{ $categories->firstItem() + $loop->index }}</td>
                                          <td>{{ $category->category_name}}</td>
                                          <td>{{ $category->user_id}}</td>
                                          <td>
@@ -48,6 +48,7 @@
                                   
                                     </tbody>
                                 </table>
+                            {{$categories->links()}}
                        </div>
                     </div>
                 </div>
