@@ -30,6 +30,8 @@ Route::get('category/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('category/update/{id}', [CategoryController::class, 'update']);
 
 Route::get('category/softdelete/{id}', [CategoryController::class, 'SoftDelete']);
+Route::get('category/restore/{id}', [CategoryController::class, 'Restore']);
+Route::get('category/delete_permanently/{id}', [CategoryController::class, 'DeletePermanent']);
 
 
 
