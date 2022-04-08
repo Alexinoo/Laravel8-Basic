@@ -109,22 +109,20 @@ class BrandController extends Controller
         $validated = $request->validate(
             [
                 'brand_name' => 'required|unique:brands|min:4',
-                'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                // 'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             // Custom error messages
             [
                 'brand_name.required' => 'Brand name cannot be blank',
-                'brand_image.required' => 'Brand image cannot be blank',
+                // 'brand_image.required' => 'Brand image cannot be blank',
             ]
         );
         $brand = Brand::find($id);
 
-        $brand->brand_name = $request->brand_name;
-
         //LOGIC - Delete from destination and upload a new image
         if ($request->hasfile('brand_image')) {
 
-            $destination = public_path('image/brand/' . $brand->brand_image);
+            $destination = public_path('image/brand/' . $request->brand_image);
 
             // Check if image exists in the destination folder
             if (File::exists($destination)) {
@@ -145,11 +143,21 @@ class BrandController extends Controller
 
             //Save the filename in the db
             $brand->brand_image = $img_name;
+
+            Brand::find($id)->update([
+                'brand_name' =>  $request->brand_name,
+                'brand_image' =>  $img_name,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
+        } else {
+
+            Brand::find($id)->update([
+                'brand_name' =>  $request->brand_name,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
         }
-
-        $brand->update();
-
-        return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
     }
 
     /**
