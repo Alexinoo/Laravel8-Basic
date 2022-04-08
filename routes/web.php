@@ -33,6 +33,8 @@ Route::get('category/delete_permanently/{id}', [CategoryController::class, 'Dele
 // BRAND
 Route::get('brand/all', [BrandController::class, 'index'])->name('all.brand');
 Route::post('brand/add', [BrandController::class, 'store'])->name('store.brand');
+Route::get('brand/edit/{id}', [BrandController::class, 'edit']);
+Route::post('brand/update/{id}', [BrandController::class, 'update']);
 
 
 Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'])->group(function () {
