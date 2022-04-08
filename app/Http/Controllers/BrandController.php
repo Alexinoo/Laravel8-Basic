@@ -160,6 +160,22 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand = Brand::find($id);
+        if ($brand) {
+
+            $destination = public_path('image/brand/' . $brand->brand_image);
+            // /Check if image exists in the destination folder
+            if (File::exists($destination)) {
+                // IF SO - DELETE
+                File::delete($destination);
+            }
+
+            //Delete category itself
+            $brand->delete();
+
+            return redirect()->route('all.brand')->with('success', 'Brand deleted successfully');
+        } else {
+            return "No brand ID Found";
+        }
     }
 }
