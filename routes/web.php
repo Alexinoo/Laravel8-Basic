@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MultipictureController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,11 @@ Route::post('brand/add', [BrandController::class, 'store'])->name('store.brand')
 Route::get('brand/edit/{id}', [BrandController::class, 'edit']);
 Route::post('brand/update/{id}', [BrandController::class, 'update']);
 Route::get('brand/delete/{id}', [BrandController::class, 'destroy']);
+
+
+// Multi Images
+Route::get('multi-image/all', [MultipictureController::class, 'index'])->name('multi.image');
+Route::post('multi-image/add', [MultipictureController::class, 'store'])->name('store.multi-image');
 
 
 Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'])->group(function () {
