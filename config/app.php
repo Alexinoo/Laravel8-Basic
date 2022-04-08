@@ -177,6 +177,9 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        // Register service provider for this package. - Image intervention
+        Intervention\Image\ImageServiceProvider::class
+
     ],
 
     /*
@@ -231,6 +234,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // Add the facade of this package 
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
