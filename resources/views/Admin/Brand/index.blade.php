@@ -34,9 +34,10 @@
                                 {{-- @php($i=1) --}}
                                 @foreach($brands as $key => $brand)
                                       <tr>
-                                         <td>{{ $brand->firstItem() + $loop->index }}</td>
+                                         <td>{{ $brands->firstItem() + $loop->index }}</td>
                                          <td>{{ $brand->brand_name}}</td>
-                                         <td><img src="{{ url('public/files'.$brand->brand_image)}}" alt="Brand"></td>
+                                         <td><img src="{{ asset('image/brand/'.$brand->brand_image)}}" alt="logo"  style="max-width:60px;height:50px"/>
+                                        </td>
                                          <td>
                                             @if($brand->created_at)
                                                 {{Carbon\Carbon::parse( $brand->created_at)->diffForHumans() }}
