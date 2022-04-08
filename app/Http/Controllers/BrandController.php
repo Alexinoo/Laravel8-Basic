@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BrandController extends Controller
 {
@@ -91,7 +92,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = Brand::find($id);
+
+        return view('Admin.Brand.edit', compact('brand'));
     }
 
     /**
@@ -103,7 +106,50 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            [
+                'brand_name' => 'required|unique:brands|min:4',
+                'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            // Custom error messages
+            [
+                'brand_name.required' => 'Brand name cannot be blank',
+                'brand_image.required' => 'Brand image cannot be blank',
+            ]
+        );
+        $brand = Brand::find($id);
+
+        $brand->brand_name = $request->brand_name;
+
+        //LOGIC - Delete from destination and upload a new image
+        if ($request->hasfile('brand_image')) {
+
+            $destination = public_path('image/brand/' . $brand->brand_image);
+
+            // Check if image exists in the destination folder
+            if (File::exists($destination)) {
+
+                // IF SO - DELETE
+                File::delete($destination);
+            }
+
+            //PROCEED WITH THE UPLOAD
+
+            $brand_image = $request->file('brand_image');
+            // get file extension
+            $img_name = time() . '.' . $brand_image->getClientOriginalExtension();
+            // image name
+
+            // Store/move in the public directory
+            $brand_image->move(public_path('image/brand'), $img_name);
+
+            //Save the filename in the db
+            $brand->brand_image = $img_name;
+        }
+
+        $brand->update();
+
+        return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
     }
 
     /**
