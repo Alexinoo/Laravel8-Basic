@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Image;
 
 class BrandController extends Controller
 {
@@ -54,19 +55,20 @@ class BrandController extends Controller
         // store the img
         $brand_image = $request->file('brand_image');
 
-        // Get the extension in lower case
-        $image_ext = strtolower($brand_image->getClientOriginalExtension());
+        // Get Image name with nextension 
+        $image_name = time() . '.' . $brand_image->getClientOriginalExtension();
 
-        // image name
-        $img_name = time() . '.' . $image_ext;
+        // Use Image Intervention to resize
+        $image_resize = Image::make($brand_image->getRealPath())->resize(400, 300);
 
-        // Store/move in the public directory
-        $brand_image->move(public_path('image/brand'), $img_name);
+        //Save in the public directory
+        $image_resize->save('image/brand/' . $image_name, 80);
+
 
         // USE ELOQUENT ORM
         Brand::insert([
             'brand_name' => $request->brand_name,
-            'brand_image' => $img_name,
+            'brand_image' => $image_name,
             'created_at' => Carbon::now(),
         ]);
 
@@ -134,9 +136,9 @@ class BrandController extends Controller
             //PROCEED WITH THE UPLOAD
 
             $brand_image = $request->file('brand_image');
-            // get file extension
+
+            // get file extension - assign a unique name
             $img_name = time() . '.' . $brand_image->getClientOriginalExtension();
-            // image name
 
             // Store/move in the public directory
             $brand_image->move(public_path('image/brand'), $img_name);
