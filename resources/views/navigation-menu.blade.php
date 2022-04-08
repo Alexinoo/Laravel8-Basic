@@ -21,9 +21,14 @@
                        Category
                     </x-jet-nav-link>
 
-                    {{-- ADDED CATEGORIES --}}
+                    {{-- ADDED BRAND --}}
                     <x-jet-nav-link href="{{ route('all.brand')}}">
                        Brand
+                    </x-jet-nav-link>
+
+                    {{-- ADDED BRAND --}}
+                    <x-jet-nav-link href="{{ route('multi.image')}}">
+                       Multi Image
                     </x-jet-nav-link>
                 </div>
             </div>
