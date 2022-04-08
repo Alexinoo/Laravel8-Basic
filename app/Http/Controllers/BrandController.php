@@ -108,7 +108,7 @@ class BrandController extends Controller
     {
         $validated = $request->validate(
             [
-                'brand_name' => 'required|unique:brands|min:4',
+                'brand_name' => 'required|min:4',
                 // 'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             // Custom error messages
