@@ -57,8 +57,8 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
         // $users = User::all();
 
         // QUERY BUILDER
-        $users = DB::table('users')->get();
+        //  $users = DB::table('users')->get();
 
-        return view('dashboard', compact('users'));
+        return view('Admin.index');
     })->name('dashboard');
 });
