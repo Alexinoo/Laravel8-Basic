@@ -36,11 +36,11 @@
 
     <div class="wrapper">
       
-        @include('layouts.inc.sidebar')
+        @include('layouts.backend.inc.sidebar')
 
       <div class="page-wrapper">
 
-        @include('layouts.inc.header')
+        @include('layouts.backend.inc.header')
         
         <div class="content-wrapper">
           <div class="content">		
@@ -48,7 +48,7 @@
                 </div>
         </div>
 
-        @include('layouts.inc.footer')
+        @include('layouts.backend.inc.footer')
 
       </div>
     </div>
