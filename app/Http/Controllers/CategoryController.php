@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        // Call default middleware
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
