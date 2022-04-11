@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultipictureController;
+use App\Http\Controllers\SliderController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,3 +74,14 @@ Route::get('user/logout', function () {
 
     return redirect()->route('login')->with('success', 'User logged out successfully');
 })->name('user.logout');
+
+
+
+
+
+
+
+// ADMIN --ALL ROUTES home.slider
+Route::get('slider/all', [SliderController::class, 'index'])->name('home.slider');
+Route::get('slider-add', [SliderController::class, 'create']);
+Route::post('slider-add', [SliderController::class, 'store'])->name('store.slider');
