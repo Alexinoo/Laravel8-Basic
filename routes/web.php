@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultipictureController;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -62,3 +63,11 @@ Route::middleware(['auth:sanctum',  config('jetstream.auth_session'), 'verified'
         return view('Admin.index');
     })->name('dashboard');
 });
+
+
+// Logout route
+Route::get('user/logout', function () {
+    Auth::logout();
+
+    return redirect()->route('login')->with('success', 'User logged out successfully');
+})->name('user.logout');
