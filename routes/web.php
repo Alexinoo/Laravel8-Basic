@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultipictureController;
@@ -40,6 +41,9 @@ Route::post('category/update/{id}', [CategoryController::class, 'update']);
 Route::get('category/softdelete/{id}', [CategoryController::class, 'SoftDelete']);
 Route::get('category/restore/{id}', [CategoryController::class, 'Restore']);
 Route::get('category/delete_permanently/{id}', [CategoryController::class, 'DeletePermanent']);
+
+
+
 
 // BRAND
 Route::get('brand/all', [BrandController::class, 'index'])->name('all.brand');
@@ -88,3 +92,11 @@ Route::post('slider-add', [SliderController::class, 'store'])->name('store.slide
 Route::get('slider/edit/{id}', [SliderController::class, 'edit']);
 Route::post('slider/update/{id}', [SliderController::class, 'update']);
 Route::get('slider/delete/{id}', [SliderController::class, 'destroy']);
+
+//ABOUT
+Route::get('home/about', [AboutController::class, 'index'])->name('home.about');
+Route::get('about/add', [AboutController::class, 'create']);
+Route::post('about/add', [AboutController::class, 'store'])->name('store.about');
+Route::get('about/edit/{id}', [AboutController::class, 'edit']);
+Route::post('about/update/{id}', [AboutController::class, 'update']);
+Route::get('about/delete/{id}', [AboutController::class, 'destroy']);
