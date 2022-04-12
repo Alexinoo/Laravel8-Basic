@@ -85,3 +85,6 @@ Route::get('user/logout', function () {
 Route::get('slider/all', [SliderController::class, 'index'])->name('home.slider');
 Route::get('slider-add', [SliderController::class, 'create']);
 Route::post('slider-add', [SliderController::class, 'store'])->name('store.slider');
+Route::get('slider/edit/{id}', [SliderController::class, 'edit']);
+Route::post('slider/update/{id}', [SliderController::class, 'update']);
+Route::get('slider/delete/{id}', [SliderController::class, 'destroy']);
