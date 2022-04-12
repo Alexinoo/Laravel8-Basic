@@ -75,7 +75,7 @@ class SliderController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        return redirect()->back()->with('success', 'Slider Added successfully');
+        return redirect()->route('home.slider')->with('success', 'Slider Added successfully');
     }
 
     /**
