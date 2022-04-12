@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Slider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 use Image;
 
 class SliderController extends Controller
@@ -42,7 +42,7 @@ class SliderController extends Controller
     {
         $validated = $request->validate(
             [
-                'title' => 'required|unique:sliders|min:4',
+                'title' => 'required|min:4',
                 'description' => 'required|max:255',
                 'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
@@ -97,7 +97,9 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = Slider::find($id);
+
+        return view('Admin.Slider.edit', compact('slider'));
     }
 
     /**
@@ -109,7 +111,63 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => 'required|min:4',
+                'description' => 'required|max:255',
+                'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            // Custom error messages
+            [
+                'title.required' => 'Title cannot be blank',
+                'description.required' => 'Description cannot be blank',
+                'description.required' => 'Slider image cannot be blank',
+            ]
+        );
+
+        $slider = Slider::find($id);
+
+        //LOGIC - Delete from destination and upload a new image
+        if ($request->hasfile('image')) {
+
+            $destination = public_path('image/slider/' . $request->image);
+
+            // Check if image exists in the destination folder
+            if (File::exists($destination)) {
+
+                // IF SO - DELETE
+                File::delete($destination);
+            }
+
+            //PROCEED WITH THE UPLOAD
+
+            $slider_image = $request->file('image');
+
+            // get file extension - assign a unique name
+            $img_name = time() . '.' . $slider_image->getClientOriginalExtension();
+
+            // Use Image Intervention to resize
+            $image_resize = Image::make($slider_image->getRealPath())->resize(1920, 1088);
+
+            //Save in the public directory
+            $image_resize->save('image/slider/' . $img_name, 80);
+
+            Slider::find($id)->update([
+                'title' =>  $request->title,
+                'description' =>  $request->description,
+                'image' =>  $img_name,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->route('home.slider')->with('success', 'Slider Updated successfully');
+        } else {
+
+            Slider::find($id)->update([
+                'title' => $request->title,
+                'description' =>  $request->description,
+                'updated_at' => Carbon::now()
+            ]);
+            return redirect()->route('home.slider')->with('success', 'Slider Updated successfully');
+        }
     }
 
     /**
@@ -120,6 +178,22 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $slider = Slider::find($id);
+        if ($slider) {
+
+            $destination = public_path('image/slider/' . $slider->image);
+            // /Check if image exists in the destination folder
+            if (File::exists($destination)) {
+                // IF SO - DELETE
+                File::delete($destination);
+            }
+
+            //Delete category itself
+            $slider->delete();
+
+            return redirect()->route('home.slider')->with('success', 'Slider deleted successfully');
+        } else {
+            return "No slider ID Found";
+        }
     }
 }
