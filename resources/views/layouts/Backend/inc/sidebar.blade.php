@@ -44,20 +44,20 @@
                               </a>
                             </li>
                             <li  class="active" >
-                              <a class="sidenav-item-link" href="index.html">
-                                <span class="nav-text">Home - About </span>
+                              <a class="sidenav-item-link" href="{{route('home.about') }}">
+                                <span class="nav-text"> About </span>
                                 
                               </a>
                             </li>
                             <li  class="active" >
-                              <a class="sidenav-item-link" href="index.html">
-                                <span class="nav-text">Home - Portfolio</span>
+                              <a class="sidenav-item-link" href="#">
+                                <span class="nav-text">Portfolio</span>
                                 
                               </a>
                             </li>
                             <li  class="active" >
                               <a class="sidenav-item-link" href="{{route('all.brand')}}">
-                                <span class="nav-text">Home Brand</span>
+                                <span class="nav-text">Brand</span>
                                 
                               </a>
                             </li>
