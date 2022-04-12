@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -13,7 +15,9 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //
+        $abouts = About::latest()->paginate(5);
+
+        return view('Admin.About.index', compact('abouts'));
     }
 
     /**
@@ -23,7 +27,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.About.create');
     }
 
     /**
@@ -34,7 +38,29 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => 'required|unique:abouts|min:4',
+                'short_desc' => 'required',
+                'long_desc' => 'required',
+            ],
+            // Custom error messages
+            [
+                'title.required' => 'Title cannot be blank',
+                'short_desc.required' => 'Short desc cannot be blank',
+                'long_desc.required' =>  'Long desc cannot be blank',
+            ]
+        );
+
+        // USE ELOQUENT ORM
+        About::insert([
+            'title' => $request->title,
+            'short_desc' =>  $request->short_desc,
+            'long_desc' =>  $request->long_desc,
+            'created_at' => Carbon::now(),
+        ]);
+
+        return redirect()->route('home.about')->with('success', 'About content inserted successfully');
     }
 
     /**
@@ -56,7 +82,9 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        //
+        $about = About::find($id);
+
+        return view('Admin.About.edit', compact('about'));
     }
 
     /**
@@ -68,7 +96,29 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate(
+            [
+                'title' => 'required|unique:abouts|min:4',
+                'short_desc' => 'required',
+                'long_desc' => 'required',
+            ],
+            // Custom error messages
+            [
+                'title.required' => 'Title cannot be blank',
+                'short_desc.required' => 'Short desc cannot be blank',
+                'long_desc.required' =>  'Long desc cannot be blank',
+            ]
+        );
+
+        // USE ELOQUENT ORM
+        About::find($id)->update([
+            'title' => $request->title,
+            'short_desc' =>  $request->short_desc,
+            'long_desc' =>  $request->long_desc,
+            'created_at' => Carbon::now(),
+        ]);
+
+        return redirect()->route('home.about')->with('success', 'About content updated successfully');
     }
 
     /**
@@ -79,6 +129,8 @@ class AboutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = About::find($id)->delete();
+
+        return redirect()->back()->with('success', 'About content deleted successfully');
     }
 }
