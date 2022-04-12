@@ -23,10 +23,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col"  width="10%">Title</th>
+                                        <th scope="col" width="45%">Description</th>
+                                        <th scope="col"  width="25%">Image</th>
+                                        <th scope="col"  width="20%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
