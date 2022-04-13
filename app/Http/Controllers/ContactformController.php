@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactForm;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactformController extends Controller
 {
@@ -15,7 +16,9 @@ class ContactformController extends Controller
      */
     public function index()
     {
-        //
+        $messages  = DB::table('contact_forms')->paginate();
+
+        return view('Admin.Contact.message', compact('messages'));
     }
 
     /**
@@ -104,6 +107,8 @@ class ContactformController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  ContactForm::find($id)->delete();
+
+        return redirect()->route('admin.contact')->with('success', 'Message deleted successfully');
     }
 }
