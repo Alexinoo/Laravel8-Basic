@@ -115,7 +115,7 @@ class AboutController extends Controller
             'title' => $request->title,
             'short_desc' =>  $request->short_desc,
             'long_desc' =>  $request->long_desc,
-            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         return redirect()->route('home.about')->with('success', 'About content updated successfully');
