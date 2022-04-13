@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -130,5 +131,14 @@ class ContactController extends Controller
         $delete =  Contact::find($id)->delete();
 
         return redirect()->route('admin.contact')->with('success', 'Contact deleted successfully');
+    }
+
+
+    // Frontend - Contact
+    public function Contact()
+    {
+        $contact = DB::table('contacts')->first();
+
+        return view('Pages.contact', compact('contact'));
     }
 }
