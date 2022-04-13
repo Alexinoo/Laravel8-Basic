@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultipictureController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SliderController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -105,3 +106,7 @@ Route::post('about/add', [AboutController::class, 'store'])->name('store.about')
 Route::get('about/edit/{id}', [AboutController::class, 'edit']);
 Route::post('about/update/{id}', [AboutController::class, 'update']);
 Route::get('about/delete/{id}', [AboutController::class, 'destroy']);
+
+
+// FRONTEND --Page Route
+Route::get('portfolio', [PortfolioController::class, 'index'])->name('portfolio');
