@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MultipictureController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SliderController;
@@ -107,6 +108,13 @@ Route::get('about/edit/{id}', [AboutController::class, 'edit']);
 Route::post('about/update/{id}', [AboutController::class, 'update']);
 Route::get('about/delete/{id}', [AboutController::class, 'destroy']);
 
+//CONTACT '
+Route::get('admin/contact', [ContactController::class, 'index'])->name('admin.contact');
+Route::get('contact-add', [ContactController::class, 'create']);
+Route::post('contact-add', [ContactController::class, 'store'])->name('store.contact');
+Route::get('contact/edit/{id}', [ContactController::class, 'edit']);
+Route::post('contact/update/{id}', [ContactController::class, 'update']);
+Route::get('contact/delete/{id}', [ContactController::class, 'destroy']);
 
 // FRONTEND --Page Route
 Route::get('portfolio', [PortfolioController::class, 'index'])->name('portfolio');
