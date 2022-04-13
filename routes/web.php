@@ -110,7 +110,7 @@ Route::get('about/edit/{id}', [AboutController::class, 'edit']);
 Route::post('about/update/{id}', [AboutController::class, 'update']);
 Route::get('about/delete/{id}', [AboutController::class, 'destroy']);
 
-//CONTACT '
+//CONTACT - ADMIN BACKEND
 Route::get('admin/contact', [ContactController::class, 'index'])->name('admin.contact');
 Route::get('contact-add', [ContactController::class, 'create']);
 Route::post('contact-add', [ContactController::class, 'store'])->name('store.contact');
@@ -127,3 +127,7 @@ Route::get('contact', [ContactController::class, 'Contact'])->name('contact');
 //CONTACT US FORM
 
 Route::post('contact-us', [ContactformController::class, 'store'])->name('contact-form');
+
+//MESSAGE - ADMIN BACKEND
+Route::get('admin/message', [ContactformController::class, 'index'])->name('admin.message');
+Route::get('message/delete/{id}', [ContactformController::class, 'destroy']);
