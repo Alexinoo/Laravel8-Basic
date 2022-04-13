@@ -8,7 +8,7 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li class="active"><a href="{{route('home')}}">Home</a></li>
 
           <li class="drop-down"><a href="">About</a>
             <ul>
@@ -31,7 +31,7 @@
           <li><a href="{{route('portfolio')}}">Portfolio</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="{{route('contact')}}">Contact</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->
