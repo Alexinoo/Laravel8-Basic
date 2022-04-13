@@ -1,6 +1,8 @@
    
    @extends('layouts.frontend.home_master')
 
+  @include('layouts.frontend.inc.hero')  
+
    @section('content')      
   
    <!-- ======= About Us Section ======= -->
