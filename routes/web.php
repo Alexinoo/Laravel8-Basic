@@ -33,7 +33,9 @@ Route::get('/', function () {
 
     $abouts = DB::table('abouts')->first();
 
-    return view('home', compact('brands', 'abouts'));
+    $galleries = DB::table('multipictures')->get();
+
+    return view('home', compact('brands', 'abouts', 'galleries'));
 });
 
 // Category
