@@ -36,8 +36,6 @@
 
     @include('layouts.frontend.inc.header')
 
-    @include('layouts.frontend.inc.hero')  
-
         <main id="main">
 
             @yield('content')
