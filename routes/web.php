@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactformController;
 use App\Http\Controllers\MultipictureController;
@@ -131,3 +132,8 @@ Route::post('contact-us', [ContactformController::class, 'store'])->name('contac
 //MESSAGE - ADMIN BACKEND
 Route::get('admin/message', [ContactformController::class, 'index'])->name('admin.message');
 Route::get('message/delete/{id}', [ContactformController::class, 'destroy']);
+
+
+// CHANGE PASSWORD
+Route::get('change/password', [ChangePassword::class, 'create'])->name('change.password');
+Route::post('password/update', [ChangePassword::class, 'update'])->name('password.update');
