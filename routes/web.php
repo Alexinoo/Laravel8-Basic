@@ -38,7 +38,7 @@ Route::get('/', function () {
     $galleries = DB::table('multipictures')->get();
 
     return view('home', compact('brands', 'abouts', 'galleries'));
-});
+})->name('home');
 
 // Category
 Route::get('category/all', [CategoryController::class, 'index'])->name('all.category');
@@ -116,5 +116,6 @@ Route::get('contact/edit/{id}', [ContactController::class, 'edit']);
 Route::post('contact/update/{id}', [ContactController::class, 'update']);
 Route::get('contact/delete/{id}', [ContactController::class, 'destroy']);
 
-// FRONTEND --Page Route
+// FRONTEND --HOME Page Route
 Route::get('portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+Route::get('contact', [ContactController::class, 'Contact'])->name('contact');
