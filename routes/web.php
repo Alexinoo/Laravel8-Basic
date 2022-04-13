@@ -4,9 +4,11 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactformController;
 use App\Http\Controllers\MultipictureController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SliderController;
+use App\Models\ContactForm;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -118,4 +120,10 @@ Route::get('contact/delete/{id}', [ContactController::class, 'destroy']);
 
 // FRONTEND --HOME Page Route
 Route::get('portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+
+
 Route::get('contact', [ContactController::class, 'Contact'])->name('contact');
+
+//CONTACT US FORM
+
+Route::post('contact-us', [ContactformController::class, 'store'])->name('contact-form');
