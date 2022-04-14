@@ -6,13 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    @if(session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success')}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
-                            <div class="card">
+                    <div class="card">
                         <div class="card-header">
                                All brands
                                 </div>
