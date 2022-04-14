@@ -38,29 +38,26 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(
-            [
-                'title' => 'required|unique:abouts|min:4',
-                'short_desc' => 'required',
-                'long_desc' => 'required',
-            ],
-            // Custom error messages
-            [
-                'title.required' => 'Title cannot be blank',
-                'short_desc.required' => 'Short desc cannot be blank',
-                'long_desc.required' =>  'Long desc cannot be blank',
-            ]
-        );
 
-        // USE ELOQUENT ORM
-        About::insert([
-            'title' => $request->title,
-            'short_desc' =>  $request->short_desc,
-            'long_desc' =>  $request->long_desc,
-            'created_at' => Carbon::now(),
-        ]);
+        $about = new About;
 
-        return redirect()->route('home.about')->with('success', 'About content inserted successfully');
+        $about->title = $request->title;
+        $about->short_desc = $request->short_desc;
+        $about->long_desc = $request->long_desc;
+
+        if ($about->save()) {
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'About content inserted successfully'
+            ]);
+        } else {
+
+            return response()->json([
+                'status' => 400,
+                'message' => 'Error inserting record'
+            ]);
+        }
     }
 
     /**
