@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactformController;
 use App\Http\Controllers\MultipictureController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
 use App\Models\ContactForm;
 use App\Models\User;
@@ -137,3 +138,9 @@ Route::get('message/delete/{id}', [ContactformController::class, 'destroy']);
 // CHANGE PASSWORD
 Route::get('change/password', [ChangePassword::class, 'create'])->name('change.password');
 Route::post('password/update', [ChangePassword::class, 'update'])->name('password.update');
+
+
+
+// USER PROFILE UPDATE route 
+Route::get('user/profile', [ProfileController::class, 'index'])->name('profile.update');
+Route::post('update-profile', [ProfileController::class, 'update']);
