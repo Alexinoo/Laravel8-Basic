@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <title>Sleek - Admin Dashboard Template</title>
 
   <!-- GOOGLE FONTS -->
@@ -23,6 +25,12 @@
   <link id="sleek-css" rel="stylesheet" href="{{asset('backend/assets/css/sleek.css')}}" />  
   <link href="{{asset('backend/assets/img/favicon.png')}}" rel="shortcut icon" />
   <script src="{{asset('backend/assets/plugins/nprogress/nprogress.js')}}"></script>
+
+  {{-- JQuery UI min.css--}}
+  <link rel="stylesheet" href="{{ asset('backend/assets/css/jquery-ui.min.css')}}">
+
+  {{--Toastr min.css--}}
+  <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css')}}">
 </head>
 
 
@@ -74,5 +82,18 @@
 <script src="{{ asset('backend/assets/js/date-range.js') }}"></script>
 <script src="{{ asset('backend/assets/js/map.js') }}"></script>
 <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
+
+{{-- JQuery UI min.js--}}
+<script src="{{ asset('backend/assets/js/jquery-ui.min.js') }}"></script>
+
+{{-- Validate --}}
+<script src="{{ asset('backend/assets/js/validate.js') }}"></script>
+
+{{-- Toastr --}}
+<script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
+
+     @yield('scripts')
+
+     
   </body>
 </html>
