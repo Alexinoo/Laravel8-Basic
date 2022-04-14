@@ -48,7 +48,7 @@ class BrandController extends Controller
     {
         $validated = $request->validate(
             [
-                'brand_name' => 'required|unique:brands|min:4',
+                'brand_name' => 'required|unique:brands',
                 'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             // Custom error messages
@@ -78,7 +78,12 @@ class BrandController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        return redirect()->back()->with('success', 'Brand Added successfully');
+        $notification = array(
+            'message' => 'Brand Added successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -116,7 +121,7 @@ class BrandController extends Controller
     {
         $validated = $request->validate(
             [
-                'brand_name' => 'required|min:4',
+                'brand_name' => 'required',
                 // 'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             // Custom error messages
@@ -157,14 +162,25 @@ class BrandController extends Controller
                 'brand_image' =>  $img_name,
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
+
+            $notification = array(
+                'message' => 'Brand Updated successfully',
+                'alert-type' => 'info',
+            );
+
+            return redirect()->route('all.brand')->with($notification);
         } else {
 
             Brand::find($id)->update([
                 'brand_name' =>  $request->brand_name,
                 'updated_at' => Carbon::now()
             ]);
-            return redirect()->route('all.brand')->with('success', 'Brand Updated successfully');
+
+            $notification = array(
+                'message' => 'Brand Updated successfully',
+                'alert-type' => 'warning',
+            );
+            return redirect()->route('all.brand')->with($notification);
         }
     }
 
@@ -189,7 +205,12 @@ class BrandController extends Controller
             //Delete category itself
             $brand->delete();
 
-            return redirect()->route('all.brand')->with('success', 'Brand deleted successfully');
+            $notification = array(
+                'message' => 'Brand deleted successfully',
+                'alert-type' => 'error',
+            );
+
+            return redirect()->route('all.brand')->with($notification);
         } else {
             return "No brand ID Found";
         }
